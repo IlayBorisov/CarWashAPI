@@ -1,0 +1,17 @@
+C:\Users\iliys\RiderProjects\WashCar\BusinessLogic\bin\Debug\net8.0\BusinessLogic.deps.json
+C:\Users\iliys\RiderProjects\WashCar\BusinessLogic\bin\Debug\net8.0\BusinessLogic.runtimeconfig.json
+C:\Users\iliys\RiderProjects\WashCar\BusinessLogic\bin\Debug\net8.0\BusinessLogic.dll
+C:\Users\iliys\RiderProjects\WashCar\BusinessLogic\bin\Debug\net8.0\BusinessLogic.pdb
+C:\Users\iliys\RiderProjects\WashCar\BusinessLogic\bin\Debug\net8.0\DataAccess.dll
+C:\Users\iliys\RiderProjects\WashCar\BusinessLogic\bin\Debug\net8.0\DataAccess.pdb
+C:\Users\iliys\RiderProjects\WashCar\BusinessLogic\obj\Debug\net8.0\BusinessLogic.csproj.AssemblyReference.cache
+C:\Users\iliys\RiderProjects\WashCar\BusinessLogic\obj\Debug\net8.0\BusinessLogic.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\iliys\RiderProjects\WashCar\BusinessLogic\obj\Debug\net8.0\BusinessLogic.AssemblyInfoInputs.cache
+C:\Users\iliys\RiderProjects\WashCar\BusinessLogic\obj\Debug\net8.0\BusinessLogic.AssemblyInfo.cs
+C:\Users\iliys\RiderProjects\WashCar\BusinessLogic\obj\Debug\net8.0\BusinessLogic.csproj.CoreCompileInputs.cache
+C:\Users\iliys\RiderProjects\WashCar\BusinessLogic\obj\Debug\net8.0\Business.CF5D6E35.Up2Date
+C:\Users\iliys\RiderProjects\WashCar\BusinessLogic\obj\Debug\net8.0\BusinessLogic.dll
+C:\Users\iliys\RiderProjects\WashCar\BusinessLogic\obj\Debug\net8.0\refint\BusinessLogic.dll
+C:\Users\iliys\RiderProjects\WashCar\BusinessLogic\obj\Debug\net8.0\BusinessLogic.pdb
+C:\Users\iliys\RiderProjects\WashCar\BusinessLogic\obj\Debug\net8.0\BusinessLogic.genruntimeconfig.cache
+C:\Users\iliys\RiderProjects\WashCar\BusinessLogic\obj\Debug\net8.0\ref\BusinessLogic.dll

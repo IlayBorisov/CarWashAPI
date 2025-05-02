@@ -1,0 +1,31 @@
+﻿version: '3.8'
+
+services:
+  postgres:
+    image: postgres
+    container_name: wash_car
+    environment:
+      POSTGRES_USER: wash_car_user
+      POSTGRES_PASSWORD: "1234"
+      POSTGRES_DB: wash_car_db
+    ports:
+      - "5438:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  webapi:
+    container_name: webapi
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=wash_car_db;Username=wash_car_user;Password=1234
+
+volumes:
+  postgres_data:
