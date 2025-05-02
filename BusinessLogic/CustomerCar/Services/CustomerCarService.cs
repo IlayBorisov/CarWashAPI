@@ -1,22 +1,23 @@
 ﻿using BusinessLogic.Brands.Dtos;
-using BusinessLogic.DTO.Car.CustomerCar;
-using BusinessLogic.DTO.Car.Model;
-using BusinessLogic.DTO.User;
-using BusinessLogic.Services.CustomerCar;
+using BusinessLogic.Car.Dtos;
+using BusinessLogic.CustomerCar.Dtos;
+using BusinessLogic.CustomerCar.Interfaces;
+using BusinessLogic.CustomerCar.Requests;
+using BusinessLogic.User.Dtos;
 using DataAccess.Repositories.CustomerCar;
 
 namespace BusinessLogic.CustomerCar.Services;
 
 public class CustomerCarService(ICustomerCarRepository customerCarRepository) : ICustomerCarService
 {
-    public async Task<CustomerCarDto> CreateCustomerCarAsync(CustomerCarCreateDto customerCarDto, CancellationToken cancellationToken)
+    public async Task<CustomerCarDto> CreateCustomerCarAsync(CustomerCarCreateRequest customerCarRequest, CancellationToken cancellationToken)
     {
         var customerCar = new DataAccess.Model.CustomerCar
         {
-            Year = customerCarDto.Year,
-            Number = customerCarDto.Number,
-            CarId = customerCarDto.CarId,
-            CustomerId = customerCarDto.CustomerId
+            Year = customerCarRequest.Year,
+            Number = customerCarRequest.Number,
+            CarId = customerCarRequest.CarId,
+            CustomerId = customerCarRequest.CustomerId
         };
 
         await customerCarRepository.CreateCustomerCarAsync(customerCar, cancellationToken);
@@ -72,14 +73,14 @@ public class CustomerCarService(ICustomerCarRepository customerCarRepository) : 
         }).ToList();
     }
 
-    public async Task UpdateCustomerCarAsync(int id, CustomerCarCreateDto customerCarDto, CancellationToken cancellationToken)
+    public async Task UpdateCustomerCarAsync(int id, CustomerCarCreateRequest customerCarRequest, CancellationToken cancellationToken)
     {
         var customerCar = await customerCarRepository.GetCustomerCarByIdAsync(id, cancellationToken);
         if (customerCar == null)
             throw new Exception("CustomerCar not found");
 
-        customerCar.Year = customerCarDto.Year;
-        customerCar.Number = customerCarDto.Number;
+        customerCar.Year = customerCarRequest.Year;
+        customerCar.Number = customerCarRequest.Number;
         
         await customerCarRepository.UpdateCarAsync(customerCar, cancellationToken);
     }

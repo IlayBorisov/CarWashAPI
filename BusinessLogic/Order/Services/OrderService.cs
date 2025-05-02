@@ -24,22 +24,22 @@ public class OrderService(IOrderRepository orderRepository, IServiceRepository s
         return orders.Select(o => o.ToOrderDto()).ToList();
     }
 
-    public async Task<OrderDto> CreateOrderAsync(OrderCreateDto orderDto, CancellationToken cancellationToken)
+    public async Task<OrderDto> CreateOrderAsync(OrderCreateRequest orderRequest, CancellationToken cancellationToken)
     {
         var order = new DataAccess.Model.Order
         {
-            CustomersCarId = orderDto.CustomerCarId,
-            AdministratorId = orderDto.AdministratorId,
-            EmployeeId = orderDto.EmployeeId,
+            CustomersCarId = orderRequest.CustomerCarId,
+            AdministratorId = orderRequest.AdministratorId,
+            EmployeeId = orderRequest.EmployeeId,
             StartDate = DateTime.UtcNow,
-            OrderServices = orderDto.ServiceIds.Select(id => new DataAccess.Model.OrderService
+            OrderServices = orderRequest.ServiceIds.Select(id => new DataAccess.Model.OrderService
             {
                 ServiceId = id
             }).ToList()
         };
             
         // загружаем сервисы по id, чтобы получить их время
-        var services = await serviceRepository.GetByServiceIdsAsync(orderDto.ServiceIds, cancellationToken);
+        var services = await serviceRepository.GetByServiceIdsAsync(orderRequest.ServiceIds, cancellationToken);
 
         // вычисляем totalSeconds
         var totalSeconds = services.Sum(s => s.TimeInSeconds);
@@ -54,15 +54,15 @@ public class OrderService(IOrderRepository orderRepository, IServiceRepository s
         return createdOrder.ToOrderDto();
     }
 
-    public async Task UpdateOrderAsync(int id, OrderUpdateDto updateDto, CancellationToken cancellationToken)
+    public async Task UpdateOrderAsync(int id, OrderUpdateRequest updateRequest, CancellationToken cancellationToken)
     {
         var order = await orderRepository.GetByIdAsync(id, cancellationToken);
         if (order == null)
             throw new Exception("Order not found");
 
-        order.Status = updateDto.Status;
-        order.AdministratorId = updateDto.AdministratorId;
-        order.EmployeeId = updateDto.EmployeeId;
+        order.Status = updateRequest.Status;
+        order.AdministratorId = updateRequest.AdministratorId;
+        order.EmployeeId = updateRequest.EmployeeId;
 
         await orderRepository.UpdateAsync(order, cancellationToken);
     }

@@ -1,5 +1,5 @@
-﻿using BusinessLogic.Brands.Requests;
-using BusinessLogic.Services.Brand;
+﻿using BusinessLogic.Brands.Interfaces;
+using BusinessLogic.Brands.Requests;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WashCar.Controllers;

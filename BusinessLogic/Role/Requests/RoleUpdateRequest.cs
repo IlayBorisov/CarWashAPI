@@ -1,6 +1,6 @@
 ﻿namespace BusinessLogic.Role.Requests;
 
-public class RoleUpdateDto
+public class RoleUpdateRequest
 {
     public string Name { get; set; }
 }

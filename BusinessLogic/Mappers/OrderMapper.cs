@@ -1,7 +1,5 @@
-﻿using BusinessLogic.DTO.Order;
-using BusinessLogic.DTO.User;
-using BusinessLogic.Order.Dtos;
-using DataAccess.Model;
+﻿using BusinessLogic.Order.Dtos;
+using BusinessLogic.User.Dtos;
 
 namespace BusinessLogic.Mappers;
 
@@ -35,7 +33,7 @@ public static class OrderMapper
         };
     }
 
-    public static UserResponse ToUserResponse(this User user) => new UserResponse
+    public static UserResponse ToUserResponse(this DataAccess.Model.User user) => new UserResponse
     {
         Id = user.Id,
         FirstName = user.FirstName,

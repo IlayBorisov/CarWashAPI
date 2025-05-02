@@ -1,5 +1,5 @@
-﻿using BusinessLogic.DTO.User;
-using BusinessLogic.Services.User;
+﻿using BusinessLogic.User.Interfaces;
+using BusinessLogic.User.Requests;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

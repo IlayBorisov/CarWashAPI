@@ -1,6 +1,7 @@
-﻿using BusinessLogic.DTO.User;
+﻿using BusinessLogic.User.Dtos;
+using BusinessLogic.User.Requests;
 
-namespace BusinessLogic.Services.User;
+namespace BusinessLogic.User.Interfaces;
 
 public interface IUserService
 {

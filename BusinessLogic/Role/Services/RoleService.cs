@@ -8,12 +8,12 @@ namespace BusinessLogic.Role.Services;
 
 public class RoleService(IRoleRepository roleRepository) : IRoleService
 {
-    public async Task CreateRoleAsync(RoleCreateDto roleCreateDto, CancellationToken cancellationToken)
+    public async Task CreateRoleAsync(RoleCreateRequest roleCreateRequest, CancellationToken cancellationToken)
     {
         var role = new DataAccess.Model.Role
         {
-            Name = roleCreateDto.Name,
-            RoleUsers = roleCreateDto.UserId.Select(id => new RoleUser
+            Name = roleCreateRequest.Name,
+            RoleUsers = roleCreateRequest.UserId.Select(id => new RoleUser
             {
                 UserId = id
             }).ToList()
@@ -45,13 +45,13 @@ public class RoleService(IRoleRepository roleRepository) : IRoleService
         }).ToList();
     }
 
-    public async Task UpdateRoleAsync(int id, RoleUpdateDto roleUpdateDto, CancellationToken cancellationToken)
+    public async Task UpdateRoleAsync(int id, RoleUpdateRequest roleUpdateRequest, CancellationToken cancellationToken)
     {
         var role = await roleRepository.GetRoleByIdAsync(id, cancellationToken);
         if (role == null)
             throw new Exception("Role not found");
 
-        role.Name = roleUpdateDto.Name;
+        role.Name = roleUpdateRequest.Name;
 
         await roleRepository.UpdateRoleAsync(role, cancellationToken);
     }

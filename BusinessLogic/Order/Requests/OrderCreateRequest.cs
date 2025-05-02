@@ -1,6 +1,6 @@
 ﻿namespace BusinessLogic.Order.Requests;
 
-public class OrderCreateDto
+public class OrderCreateRequest
 {
     public int CustomerCarId { get; set; }
     public int? AdministratorId { get; set; }

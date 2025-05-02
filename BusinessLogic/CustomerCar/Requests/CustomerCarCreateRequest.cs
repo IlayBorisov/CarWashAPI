@@ -1,6 +1,6 @@
-﻿namespace BusinessLogic.DTO.Car.CustomerCar;
+﻿namespace BusinessLogic.CustomerCar.Requests;
 
-public class CustomerCarCreateDto
+public class CustomerCarCreateRequest
 {
     public int Year { get; set; }
     public string Number { get; set; } = string.Empty;

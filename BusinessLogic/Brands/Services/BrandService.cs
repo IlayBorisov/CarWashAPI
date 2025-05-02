@@ -1,8 +1,9 @@
 ﻿using BusinessLogic.Brands.Dtos;
+using BusinessLogic.Brands.Interfaces;
 using BusinessLogic.Brands.Requests;
 using DataAccess.Repositories.Brand;
 
-namespace BusinessLogic.Services.Brand;
+namespace BusinessLogic.Brands.Services;
 
 public class BrandService(IBrandRepository brandRepository) : IBrandService
 {

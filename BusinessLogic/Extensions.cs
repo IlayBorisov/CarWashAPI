@@ -1,18 +1,17 @@
-﻿using BusinessLogic.Car.Services;
+﻿using BusinessLogic.Brands.Interfaces;
+using BusinessLogic.Brands.Services;
+using BusinessLogic.Car.Interfaces;
+using BusinessLogic.Car.Services;
+using BusinessLogic.CustomerCar.Interfaces;
 using BusinessLogic.CustomerCar.Services;
-using BusinessLogic.DTO.Car;
 using BusinessLogic.Order.Interfaces;
 using BusinessLogic.Order.Services;
 using BusinessLogic.Role.Interfaces;
 using BusinessLogic.Role.Services;
+using BusinessLogic.Service.Interfaces;
 using BusinessLogic.Service.Services;
-using BusinessLogic.Services.Brand;
-using BusinessLogic.Services.Car;
-using BusinessLogic.Services.CustomerCar;
-using BusinessLogic.Services.Service;
-using BusinessLogic.Services.User;
-using DataAccess;
-using DataAccess.Repositories.Role;
+using BusinessLogic.User.Interfaces;
+using BusinessLogic.User.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace BusinessLogic;

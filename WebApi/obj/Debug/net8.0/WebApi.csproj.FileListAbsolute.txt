@@ -115,3 +115,4 @@ C:\Users\iliys\RiderProjects\WashCar\WebApi\bin\Debug\net8.0\Microsoft.IdentityM
 C:\Users\iliys\RiderProjects\WashCar\WebApi\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Users\iliys\RiderProjects\WashCar\WebApi\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
 C:\Users\iliys\RiderProjects\WashCar\WebApi\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\iliys\RiderProjects\WashCar\WebApi\obj\Debug\net8.0\WebApi.sourcelink.json

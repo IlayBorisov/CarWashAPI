@@ -1,6 +1,6 @@
 ﻿using BusinessLogic.Brands.Dtos;
 
-namespace BusinessLogic.DTO.Car.Model;
+namespace BusinessLogic.Car.Dtos;
 
 public class CarDto
 {

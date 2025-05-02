@@ -1,6 +1,6 @@
 ﻿using BusinessLogic.Brands.Dtos;
-using BusinessLogic.DTO.Car.CustomerCar;
-using BusinessLogic.DTO.Car.Model;
+using BusinessLogic.Car.Dtos;
+using BusinessLogic.CustomerCar.Dtos;
 
 namespace BusinessLogic.Mappers;
 

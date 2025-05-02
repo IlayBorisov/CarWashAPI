@@ -1,7 +1,7 @@
-﻿using BusinessLogic.DTO.Car.Model;
-using BusinessLogic.DTO.User;
- 
-namespace BusinessLogic.DTO.Car.CustomerCar;
+﻿using BusinessLogic.Car.Dtos;
+using BusinessLogic.User.Dtos;
+
+namespace BusinessLogic.CustomerCar.Dtos;
 
 public class CustomerCarDto
 {

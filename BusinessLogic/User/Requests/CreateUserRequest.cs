@@ -1,4 +1,4 @@
-﻿namespace BusinessLogic.DTO.User;
+﻿namespace BusinessLogic.User.Requests;
 
 public class CreateUserRequest
 {

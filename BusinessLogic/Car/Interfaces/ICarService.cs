@@ -1,13 +1,13 @@
-﻿using BusinessLogic.DTO.Car;
-using BusinessLogic.DTO.Car.Model;
+﻿using BusinessLogic.Car.Dtos;
+using BusinessLogic.Car.Requests;
 
-namespace BusinessLogic.Services.Car;
+namespace BusinessLogic.Car.Interfaces;
 
 public interface ICarService
 {
     Task<CarDto> GetCarByIdAsync(int id, CancellationToken cancellationToken);
     Task<List<CarDto>> GetAllCarsAsync(CancellationToken cancellationToken);
-    Task CreateCarAsync(CarCreateDto  carDto, CancellationToken cancellationToken);
-    Task UpdateCarAsync(int id, CarCreateDto  carDto, CancellationToken cancellationToken);
+    Task CreateCarAsync(CarCreateRequest  carRequest, CancellationToken cancellationToken);
+    Task UpdateCarAsync(int id, CarCreateRequest  carRequest, CancellationToken cancellationToken);
     Task DeleteCarAsync(int id, CancellationToken cancellationToken);
 }
