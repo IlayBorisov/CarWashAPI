@@ -3,6 +3,7 @@ using BusinessLogic.Service.Dtos;
 using BusinessLogic.Service.Interfaces;
 using BusinessLogic.Service.Requests;
 using DataAccess.Repositories.Service;
+using Microsoft.EntityFrameworkCore;
 
 namespace BusinessLogic.Service.Services;
 
@@ -28,21 +29,61 @@ public class ServiceService(IServiceRepository serviceRepository) : IServiceServ
         return ToDto(service);
     }
     
-    public async Task<List<ServiceDto>> GetAllAsync(string? sortBy = null, bool ascending = true, int page = 1,
-        int pageSize = 10, CancellationToken cancellationToken = default)
+    public async Task<PaginatedResponse<ServiceDto>> GetAllAsync(ServiceFilterRequest request, CancellationToken cancellationToken = default)
     {
-        var services = await serviceRepository.GetAllAsync(cancellationToken);
-
-        var query = services.AsQueryable();
+        var query = serviceRepository.GetAll();
         
-        if (sortBy == "price")
-            query = ascending ? query.OrderBy(x => x.PriceInCents) : query.OrderByDescending(x => x.PriceInCents);
-        else if (sortBy == "time")
-            query = ascending ? query.OrderBy(x => x.TimeInSeconds) : query.OrderByDescending(x => x.TimeInSeconds);
-        
-        query = query.Skip((page - 1) * pageSize).Take(pageSize);
+        if (request.MinPriceRub.HasValue)
+        {
+            query = query.Where(s => s.PriceInCents >= request.MinPriceRub * 100);
+        }
+        if (request.MaxPriceRub.HasValue)
+        {
+            query = query.Where(s => s.PriceInCents <= request.MaxPriceRub * 100);
+        }
 
-        return query.Select(ToDto).ToList();
+        query = request.SortBy?.ToLower() switch
+        {
+            "price" => request.Ascending
+                ? query.OrderBy(x => x.PriceInCents)
+                : query.OrderByDescending(x => x.PriceInCents),
+            "time" => request.Ascending
+                ? query.OrderBy(x => x.TimeInSeconds)
+                : query.OrderByDescending(x => x.TimeInSeconds),
+            _ => query.OrderBy(x => x.Id)
+        };
+        
+        var totalCount = await query.CountAsync(cancellationToken); // подсчет без пагинации
+
+        // а тут уже пагинация
+        var items = await query
+            .Skip((request.Page - 1) * request.PageSize)
+            .Take(request.PageSize)
+            .Select(service => new ServiceDto
+            {
+                Id = service.Id,
+                Name = service.Name,
+                Price = new PriceDto
+                {
+                    MinValue = service.PriceInCents,
+                    MaxValue = service.PriceInCents / 100,
+                    Format = $"{service.PriceInCents / 100} руб."
+                },
+                Time = new TimeDto
+                {
+                    Seconds = service.TimeInSeconds,
+                    Minutes = service.TimeInSeconds / 60
+                }
+            })
+            .ToListAsync(cancellationToken);
+
+        return new PaginatedResponse<ServiceDto>
+        {
+            Items = items,
+            TotalCount = totalCount,
+            Page = request.Page,
+            PageSize = request.PageSize
+        };
     }
     
     public async Task UpdateAsync(int id, CreateServiceRequest request, CancellationToken cancellationToken = default)

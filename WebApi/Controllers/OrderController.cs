@@ -1,6 +1,7 @@
 ﻿using BusinessLogic.Order.Dtos;
 using BusinessLogic.Order.Interfaces;
 using BusinessLogic.Order.Requests;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WashCar.Controllers;
@@ -8,9 +9,10 @@ namespace WashCar.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
 public class OrderController(IOrderService orderService): ControllerBase
 {
-     // GET api/order/{id}
+    [Authorize(Roles = "Admin,Employee,Customer")]
     [HttpGet("{id}")]
     public async Task<ActionResult<OrderDto>> GetById(int id, CancellationToken cancellationToken)
     {
@@ -25,7 +27,7 @@ public class OrderController(IOrderService orderService): ControllerBase
         }
     }
 
-    // GET api/order
+    [Authorize(Roles = "Admin,Employee,Customer")]
     [HttpGet]
     public async Task<ActionResult<List<OrderDto>>> GetAll(CancellationToken cancellationToken)
     {
@@ -33,7 +35,7 @@ public class OrderController(IOrderService orderService): ControllerBase
         return Ok(orders);
     }
 
-    // POST api/order
+    [Authorize(Roles = "Admin")]
     [HttpPost]
     public async Task<ActionResult<OrderDto>> Create([FromBody] OrderCreateRequest orderRequest, CancellationToken cancellationToken)
     {
@@ -41,8 +43,8 @@ public class OrderController(IOrderService orderService): ControllerBase
         return CreatedAtAction(nameof(GetById), new { id = createdOrder.Id }, createdOrder);
     }
 
-    // PUT api/order/{id}
-    [HttpPut("{id}")]
+    [Authorize(Roles = "Admin")]
+    [HttpPut("{id:int}")]
     public async Task<IActionResult> Update(int id, [FromBody] OrderUpdateRequest orderRequest, CancellationToken cancellationToken)
     {
         try
@@ -56,8 +58,8 @@ public class OrderController(IOrderService orderService): ControllerBase
         }
     }
 
-    // PATCH api/order/{id}/status
-    [HttpPatch("{id}/status")]
+    [Authorize(Roles = "Admin")]
+    [HttpPatch("{id:int}/status")]
     public async Task<IActionResult> UpdateStatus(int id, [FromBody] int newStatus, CancellationToken cancellationToken)
     {
         try
@@ -71,8 +73,8 @@ public class OrderController(IOrderService orderService): ControllerBase
         }
     }
 
-    // DELETE api/order/{id}
-    [HttpDelete("{id}")]
+    [Authorize(Roles = "Admin")]
+    [HttpDelete("{id:int}")]
     public async Task<IActionResult> Delete(int id, CancellationToken cancellationToken)
     {
         try
