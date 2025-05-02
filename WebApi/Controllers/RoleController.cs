@@ -9,10 +9,10 @@ namespace WashCar.Controllers;
 public class RoleController(IRoleService roleService) : ControllerBase
 {
     [HttpPost]
-    public async Task<IActionResult> CreateRoleAsync([FromBody] RoleCreateDto roleCreateDto,
+    public async Task<IActionResult> CreateRoleAsync([FromBody] RoleCreateRequest roleCreateRequest,
         CancellationToken cancellationToken)
     {
-        await roleService.CreateRoleAsync(roleCreateDto, cancellationToken);
+        await roleService.CreateRoleAsync(roleCreateRequest, cancellationToken);
         return NoContent();
     }
 
@@ -31,7 +31,7 @@ public class RoleController(IRoleService roleService) : ControllerBase
     }
 
     [HttpPut("{id:int}")]
-    public async Task<IActionResult> UpdateRoleAsync(int id, [FromBody] RoleUpdateDto role,
+    public async Task<IActionResult> UpdateRoleAsync(int id, [FromBody] RoleUpdateRequest role,
         CancellationToken cancellationToken)
     {
         await roleService.UpdateRoleAsync(id, role, cancellationToken);

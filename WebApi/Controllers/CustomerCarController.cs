@@ -1,5 +1,6 @@
-﻿using BusinessLogic.DTO.Car.CustomerCar;
-using BusinessLogic.Services.CustomerCar;
+﻿using BusinessLogic.CustomerCar.Dtos;
+using BusinessLogic.CustomerCar.Interfaces;
+using BusinessLogic.CustomerCar.Requests;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WashCar.Controllers;
@@ -9,9 +10,9 @@ namespace WashCar.Controllers;
 public class CustomerCarController(ICustomerCarService customerCarService) : ControllerBase
 {
     [HttpPost]
-    public async Task<ActionResult<CustomerCarDto>> CreateCustomerCar([FromBody] CustomerCarCreateDto customerCarDto, CancellationToken cancellationToken)
+    public async Task<ActionResult<CustomerCarDto>> CreateCustomerCar([FromBody] CustomerCarCreateRequest customerCarRequest, CancellationToken cancellationToken)
     {
-        var createdCar = await customerCarService.CreateCustomerCarAsync(customerCarDto, cancellationToken);
+        var createdCar = await customerCarService.CreateCustomerCarAsync(customerCarRequest, cancellationToken);
         return Ok(createdCar);
     }
     [HttpGet("{id:int}")]
@@ -29,10 +30,10 @@ public class CustomerCarController(ICustomerCarService customerCarService) : Con
     }
 
     [HttpPut("{id:int}")]
-    public async Task<IActionResult> UpdateCarAsync(int id, [FromBody] CustomerCarCreateDto customerCarDto,
+    public async Task<IActionResult> UpdateCarAsync(int id, [FromBody] CustomerCarCreateRequest customerCarRequest,
         CancellationToken cancellationToken)
     {
-        await customerCarService.UpdateCustomerCarAsync(id, customerCarDto, cancellationToken);
+        await customerCarService.UpdateCustomerCarAsync(id, customerCarRequest, cancellationToken);
         return NoContent();
     }
 

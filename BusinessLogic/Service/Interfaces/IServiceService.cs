@@ -1,7 +1,7 @@
 ﻿using BusinessLogic.Service.Dtos;
 using BusinessLogic.Service.Requests;
 
-namespace BusinessLogic.Services.Service;
+namespace BusinessLogic.Service.Interfaces;
 
 public interface IServiceService
 {

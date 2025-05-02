@@ -1,4 +1,4 @@
-﻿namespace BusinessLogic.DTO.User;
+﻿namespace BusinessLogic.User.Dtos;
 
 public class UserResponse
 {

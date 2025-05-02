@@ -1,6 +1,6 @@
 ﻿namespace BusinessLogic.Order.Requests;
 
-public class OrderUpdateDto
+public class OrderUpdateRequest
 {
     public int Status { get; set; }
     public int? AdministratorId { get; set; }

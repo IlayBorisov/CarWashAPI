@@ -1,6 +1,6 @@
-﻿using BusinessLogic.DTO.Car.CustomerCar;
-using BusinessLogic.DTO.Order;
+﻿using BusinessLogic.CustomerCar.Dtos;
 using BusinessLogic.Service.Dtos;
+using BusinessLogic.User.Dtos;
 
 namespace BusinessLogic.Order.Dtos;
 

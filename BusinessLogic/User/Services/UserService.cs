@@ -1,7 +1,9 @@
-﻿using BusinessLogic.DTO.User;
+﻿using BusinessLogic.User.Dtos;
+using BusinessLogic.User.Interfaces;
+using BusinessLogic.User.Requests;
 using DataAccess.Repositories.User;
 
-namespace BusinessLogic.Services.User;
+namespace BusinessLogic.User.Services;
 
 public class UserService(IUserRepository userRepository) : IUserService
 {

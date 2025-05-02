@@ -1,18 +1,19 @@
 ﻿using BusinessLogic.Brands.Dtos;
-using BusinessLogic.DTO.Car.Model;
-using BusinessLogic.Services.Car;
+using BusinessLogic.Car.Dtos;
+using BusinessLogic.Car.Interfaces;
+using BusinessLogic.Car.Requests;
 using DataAccess.Repositories.Car;
 
 namespace BusinessLogic.Car.Services;
 
 public class CarService(ICarRepository carRepository) : ICarService
 {
-    public async Task CreateCarAsync(CarCreateDto carDto, CancellationToken cancellationToken)
+    public async Task CreateCarAsync(CarCreateRequest carRequest, CancellationToken cancellationToken)
     {
         var car = new DataAccess.Model.Car
         {
-            Model = carDto.Model,
-            BrandId = carDto.BrandId
+            Model = carRequest.Model,
+            BrandId = carRequest.BrandId
         };
 
         await carRepository.CreateCarAsync(car, cancellationToken);
@@ -43,13 +44,13 @@ public class CarService(ICarRepository carRepository) : ICarService
         }).ToList();
     }
 
-    public async Task UpdateCarAsync(int id, CarCreateDto  carDto, CancellationToken cancellationToken)
+    public async Task UpdateCarAsync(int id, CarCreateRequest  carRequest, CancellationToken cancellationToken)
     {
         var car = await carRepository.GetCarByIdAsync(id, cancellationToken);
         if (car == null)
             throw new Exception("Car not found");
 
-        car.Model = carDto.Model;
+        car.Model = carRequest.Model;
 
         await carRepository.UpdateCarAsync(car, cancellationToken);
     }

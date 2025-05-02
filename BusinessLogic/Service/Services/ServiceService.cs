@@ -1,7 +1,7 @@
 ﻿using BusinessLogic.Dtos;
 using BusinessLogic.Service.Dtos;
+using BusinessLogic.Service.Interfaces;
 using BusinessLogic.Service.Requests;
-using BusinessLogic.Services.Service;
 using DataAccess.Repositories.Service;
 
 namespace BusinessLogic.Service.Services;

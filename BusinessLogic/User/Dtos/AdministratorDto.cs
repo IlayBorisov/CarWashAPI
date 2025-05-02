@@ -1,4 +1,4 @@
-﻿namespace BusinessLogic.DTO.Order;
+﻿namespace BusinessLogic.User.Dtos;
 
 public class AdministratorDto
 {

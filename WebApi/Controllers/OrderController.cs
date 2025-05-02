@@ -35,19 +35,19 @@ public class OrderController(IOrderService orderService): ControllerBase
 
     // POST api/order
     [HttpPost]
-    public async Task<ActionResult<OrderDto>> Create([FromBody] OrderCreateDto orderDto, CancellationToken cancellationToken)
+    public async Task<ActionResult<OrderDto>> Create([FromBody] OrderCreateRequest orderRequest, CancellationToken cancellationToken)
     {
-        var createdOrder = await orderService.CreateOrderAsync(orderDto, cancellationToken);
+        var createdOrder = await orderService.CreateOrderAsync(orderRequest, cancellationToken);
         return CreatedAtAction(nameof(GetById), new { id = createdOrder.Id }, createdOrder);
     }
 
     // PUT api/order/{id}
     [HttpPut("{id}")]
-    public async Task<IActionResult> Update(int id, [FromBody] OrderUpdateDto orderDto, CancellationToken cancellationToken)
+    public async Task<IActionResult> Update(int id, [FromBody] OrderUpdateRequest orderRequest, CancellationToken cancellationToken)
     {
         try
         {
-            await orderService.UpdateOrderAsync(id, orderDto, cancellationToken);
+            await orderService.UpdateOrderAsync(id, orderRequest, cancellationToken);
             return NoContent();
         }
         catch (Exception ex)

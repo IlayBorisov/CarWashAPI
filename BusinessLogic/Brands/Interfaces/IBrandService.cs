@@ -1,7 +1,7 @@
 ﻿using BusinessLogic.Brands.Dtos;
 using BusinessLogic.Brands.Requests;
 
-namespace BusinessLogic.Services.Brand;
+namespace BusinessLogic.Brands.Interfaces;
 
 public interface IBrandService
 {

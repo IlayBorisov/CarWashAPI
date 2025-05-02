@@ -12,3 +12,4 @@ C:\Users\iliys\RiderProjects\WashCar\DataAccess\obj\Debug\net8.0\refint\DataAcce
 C:\Users\iliys\RiderProjects\WashCar\DataAccess\obj\Debug\net8.0\DataAccess.pdb
 C:\Users\iliys\RiderProjects\WashCar\DataAccess\obj\Debug\net8.0\DataAccess.genruntimeconfig.cache
 C:\Users\iliys\RiderProjects\WashCar\DataAccess\obj\Debug\net8.0\ref\DataAccess.dll
+C:\Users\iliys\RiderProjects\WashCar\DataAccess\obj\Debug\net8.0\DataAccess.sourcelink.json
