@@ -25,7 +25,7 @@ public class UserController(IUserService userService) : ControllerBase
         var result = await userService.GetByUserIdAsync(id);
         return Ok(result);
     }
-
+    
     [Authorize(Roles = "Admin")]
     [HttpPut("{id:int}")]
     public async Task<IActionResult> UpdateUserAsync([FromRoute] int id, [FromBody] CreateUserRequest request)
@@ -33,7 +33,7 @@ public class UserController(IUserService userService) : ControllerBase
         await userService.UpdateUserAsync(id, request);
         return NoContent();
     }
-
+    
     [Authorize(Roles = "Admin")]
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> DeleteUserAsync([FromRoute] int id)

@@ -1,13 +1,16 @@
 ﻿using BusinessLogic.Role.Interfaces;
 using BusinessLogic.Role.Requests;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WashCar.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
 public class RoleController(IRoleService roleService) : ControllerBase
 {
+    [Authorize(Roles = "Admin")]
     [HttpPost]
     public async Task<IActionResult> CreateRoleAsync([FromBody] RoleCreateRequest roleCreateRequest,
         CancellationToken cancellationToken)
@@ -15,7 +18,8 @@ public class RoleController(IRoleService roleService) : ControllerBase
         await roleService.CreateRoleAsync(roleCreateRequest, cancellationToken);
         return NoContent();
     }
-
+    
+    [Authorize(Roles = "Admin,Employee,Customer")]
     [HttpGet("{id:int}")]
     public async Task<IActionResult> GetRoleAsync(int id, CancellationToken cancellationToken)
     {
@@ -23,6 +27,7 @@ public class RoleController(IRoleService roleService) : ControllerBase
         return Ok(role);
     }
 
+    [Authorize(Roles = "Admin,Employee,Customer")]
     [HttpGet]
     public async Task<IActionResult> GetAllRoleAsync(CancellationToken cancellationToken)
     {
@@ -30,6 +35,7 @@ public class RoleController(IRoleService roleService) : ControllerBase
         return Ok(role);
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpPut("{id:int}")]
     public async Task<IActionResult> UpdateRoleAsync(int id, [FromBody] RoleUpdateRequest role,
         CancellationToken cancellationToken)
@@ -38,6 +44,7 @@ public class RoleController(IRoleService roleService) : ControllerBase
         return NoContent();
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> DeleteRoleAsync([FromRoute] int id, CancellationToken cancellationToken)
     {

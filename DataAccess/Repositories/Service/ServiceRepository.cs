@@ -21,10 +21,15 @@ public class ServiceRepository(DbContext context) : IServiceRepository
         return await context.Services.Where(s => ids.Contains(s.Id)).ToListAsync(cancellationToken);
     }
     
-    public async Task<List<Model.Service>> GetAllAsync(CancellationToken cancellationToken = default)
+    public IQueryable<Model.Service> GetAll()
     {
-        return await context.Services.ToListAsync(cancellationToken);
+        return context.Services.AsQueryable();
     }
+    
+    //public async Task<List<Model.Service>> GetAllAsync(CancellationToken cancellationToken = default)
+    //{
+    //    return await context.Services.ToListAsync(cancellationToken);
+    //}
     
     public async Task UpdateServiceAsync(Model.Service service, CancellationToken cancellationToken = default)
     {
