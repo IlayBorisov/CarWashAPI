@@ -1,4 +1,4 @@
-﻿namespace BusinessLogic.Service.Dtos;
+﻿namespace BusinessLogic.Dtos;
 
 public class PaginatedResponse<T>
 {

@@ -40,11 +40,7 @@ public class OrderService(IOrderRepository orderRepository, IServiceRepository s
             
         // загружаем сервисы по id, чтобы получить их время
         var services = await serviceRepository.GetByServiceIdsAsync(orderRequest.ServiceIds, cancellationToken);
-
-        // вычисляем totalSeconds
         var totalSeconds = services.Sum(s => s.TimeInSeconds);
-
-        // устанавливаем EndDate
         order.EndDate = order.StartDate.AddSeconds(totalSeconds);
 
         await orderRepository.CreateAsync(order, cancellationToken);
