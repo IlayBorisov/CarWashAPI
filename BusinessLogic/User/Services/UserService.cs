@@ -1,7 +1,11 @@
-﻿using BusinessLogic.User.Dtos;
+﻿using BusinessLogic.Dtos;
+using BusinessLogic.Service.Dtos;
+using BusinessLogic.Service.Requests;
+using BusinessLogic.User.Dtos;
 using BusinessLogic.User.Interfaces;
 using BusinessLogic.User.Requests;
 using DataAccess.Repositories.User;
+using Microsoft.EntityFrameworkCore;
 
 namespace BusinessLogic.User.Services;
 
@@ -37,7 +41,38 @@ public class UserService(IUserRepository userRepository) : IUserService
             CreatedAt = user.CreatedAt.ToString("dd.MM.yyyy HH:mm"),
         };
     }
+    
+    public async Task<PaginatedResponse<UserResponse>> GetAllAsync(UserServiceRequest request, CancellationToken cancellationToken = default)
+    {
+        var query = userRepository.GetAllUserAsync();
+        
+        var totalCount = await query.CountAsync(cancellationToken); // подсчет без пагинации
 
+        // пагинация
+        var items = await query
+            .Skip((request.Page - 1) * request.PageSize)
+            .Take(request.PageSize)
+            .Select(user => new UserResponse
+            {
+                Id = user.Id,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Patronymic = user.Patronymic,
+                Email = user.Email,
+                IsSendNotify = user.IsSendNotify,
+                CreatedAt = user.CreatedAt.ToString("dd.MM.yyyy HH:mm")
+            })
+            .ToListAsync(cancellationToken);
+
+        return new PaginatedResponse<UserResponse>
+        {
+            Items = items,
+            TotalCount = totalCount,
+            Page = request.Page,
+            PageSize = request.PageSize
+        };
+    }
+    
     public async Task UpdateUserAsync(int id, CreateUserRequest request, CancellationToken cancellationToken = default)
     {
         var user = await userRepository.GetByUserIdAsync(id, cancellationToken);

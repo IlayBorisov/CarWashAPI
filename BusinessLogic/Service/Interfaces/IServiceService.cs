@@ -1,4 +1,5 @@
-﻿using BusinessLogic.Service.Dtos;
+﻿using BusinessLogic.Dtos;
+using BusinessLogic.Service.Dtos;
 using BusinessLogic.Service.Requests;
 using BusinessLogic.Service.Services;
 

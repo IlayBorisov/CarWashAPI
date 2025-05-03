@@ -15,6 +15,11 @@ internal class UserRepository(DbContext context) : IUserRepository
     {
         return await context.Users.FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
     }
+    
+    public IQueryable<Model.User> GetAllUserAsync()
+    {
+        return context.Users.AsQueryable();
+    }
 
     public async Task UpdateUserAsync(Model.User user, CancellationToken cancellationToken = default)
     {

@@ -26,6 +26,14 @@ public class UserController(IUserService userService) : ControllerBase
         return Ok(result);
     }
     
+    [Authorize(Roles = "Admin,Employee,Customer")]
+    [HttpGet]
+    public async Task<IActionResult> GetAllUserAsync([FromQuery] UserServiceRequest request)
+    {
+        var result = await userService.GetAllAsync(request);
+        return Ok(result);
+    }
+    
     [Authorize(Roles = "Admin")]
     [HttpPut("{id:int}")]
     public async Task<IActionResult> UpdateUserAsync([FromRoute] int id, [FromBody] CreateUserRequest request)
