@@ -7,7 +7,7 @@ public class User
     public required string LastName { get; set; }
     public string? Patronymic { get; set; }
     public required string Email { get; set; }
-    public bool IsSendNotify { get; set; } = true;
+    public bool IsSendNotify { get; set; } = false;
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     
     public ICollection<RoleUser> RoleUsers { get; set; } 

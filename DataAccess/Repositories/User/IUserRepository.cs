@@ -8,4 +8,5 @@ public interface IUserRepository
     Task<Model.User?> GetUserByEmailAsync(string email);
     Task UpdateUserAsync(Model.User user, CancellationToken cancellationToken = default);
     Task DeleteUserAsync(Model.User user, CancellationToken cancellationToken = default);
+    Task MarkNotificationSentAsync(string email);
 }
