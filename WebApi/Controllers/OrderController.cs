@@ -87,4 +87,16 @@ public class OrderController(IOrderService orderService): ControllerBase
             return NotFound(new { message = ex.Message });
         }
     }
+    
+    [HttpPost("{orderId}/services")]
+    public async Task<IActionResult> AddServices(int orderId, [FromBody] List<int> serviceIds, [FromServices] IOrderService orderService, CancellationToken cancellationToken)
+    {
+        await orderService.AddServicesToOrderAsync(new AddServicesRequest
+        {
+            OrderId = orderId,
+            ServiceIds = serviceIds
+        }, cancellationToken);
+        
+        return NoContent();
+    }
 }

@@ -40,7 +40,7 @@ public class CustomerCarService(ICustomerCarRepository customerCarRepository) : 
             {
                 Id = customerCar.Customer.Id,
                 FirstName = customerCar.Customer.FirstName,
-                LastName = customerCar.Customer.LastName
+                LastName = customerCar.Customer.LastName,
             }
         };
     }
@@ -81,6 +81,8 @@ public class CustomerCarService(ICustomerCarRepository customerCarRepository) : 
 
         customerCar.Year = customerCarRequest.Year;
         customerCar.Number = customerCarRequest.Number;
+        customerCar.CarId = customerCarRequest.CarId;
+        customerCar.CustomerId = customerCarRequest.CustomerId;
         
         await customerCarRepository.UpdateCarAsync(customerCar, cancellationToken);
     }

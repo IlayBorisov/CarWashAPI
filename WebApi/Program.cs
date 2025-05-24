@@ -2,10 +2,13 @@ using BusinessLogic;
 using DataAccess;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using BusinessLogic.Email.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
+
+builder.Services.AddTransient<EmailService>();
 
 // Configure JWT authentication
 var jwtSecretKey = builder.Configuration["Jwt:SecretKey"] ?? throw new ArgumentNullException("Jwt:SecretKey");

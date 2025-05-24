@@ -3,7 +3,7 @@
 services:
   postgres:
     image: postgres
-    container_name: wash_car
+    container_name: wash_car_postgres
     environment:
       POSTGRES_USER: wash_car_user
       POSTGRES_PASSWORD: "1234"
@@ -12,9 +12,22 @@ services:
       - "5438:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U wash_car_user -d wash_car_db" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
+  mailpit:
+    container_name: wash_car_mailpit
+    image: axllent/mailpit:latest
+    ports:
+      - "1025:1025" # SMTP-порт (для MailKit)
+      - "8025:8025" # Веб-интерфейс
+    restart: unless-stopped
+  
   webapi:
-    container_name: webapi
+    container_name: wash_car_webapi
     build:
       context: .
       dockerfile: Dockerfile
@@ -23,9 +36,15 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+      mailpit: 
+        condition: service_started
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=wash_car_db;Username=wash_car_user;Password=1234
+      - EmailSettings__SmtpHost=mailpit
+      - EmailSettings__SmtpPort=1025
+      - EmailSettings__FromAddress=borisovila603@gmail.com
+      - EmailSettings__FromName=WashCar Service
 
 volumes:
   postgres_data:

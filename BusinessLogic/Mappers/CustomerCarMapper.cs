@@ -14,11 +14,13 @@ public static class CustomerCarMapper
             Year = customerCar.Year,
             Number = customerCar.Number,
             Customer = customerCar.Customer.ToUserResponse(),
-            Car = new CarDto
+            Car = customerCar.Car == null ? null : new CarDto
             {
+                Id = customerCar.Car.Id,
                 Model = customerCar.Car.Model,
-                Brand = new BrandDto
+                Brand = customerCar.Car.Brand == null ? null :new BrandDto
                 {
+                    Id = customerCar.Car.Brand.Id,
                     Name = customerCar.Car.Brand.Name
                 }
             }

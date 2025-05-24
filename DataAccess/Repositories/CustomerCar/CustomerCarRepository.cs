@@ -12,7 +12,8 @@ public class CustomerCarRepository(DbContext context) : ICustomerCarRepository
     public async Task<Model.CustomerCar?> GetCustomerCarByIdAsync(int id, CancellationToken cancellationToken = default)
     {
         return await context.CustomerCars
-            .Include(cc => cc.Car)  
+            .Include(cc => cc.Car)
+                .ThenInclude(car => car.Brand)
             .Include(cc => cc.Customer)
             .FirstOrDefaultAsync(cc => cc.Id == id, cancellationToken);
     }
@@ -21,6 +22,7 @@ public class CustomerCarRepository(DbContext context) : ICustomerCarRepository
     {
         return await context.CustomerCars
             .Include(cc => cc.Car) 
+                .ThenInclude(car => car.Brand)
             .Include(cc => cc.Customer)
             .ToListAsync(cancellationToken);
     }

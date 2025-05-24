@@ -40,4 +40,14 @@ internal class UserRepository(DbContext context) : IUserRepository
         context.Users.Remove(user);
         await context.SaveChangesAsync(cancellationToken);
     }
+    
+    public async Task MarkNotificationSentAsync(string email)
+    {
+        var user = await context.Users.FirstOrDefaultAsync(u => u.Email == email);
+        if (user != null)
+        {
+            user.IsSendNotify = true;
+            await context.SaveChangesAsync();
+        }
+    }
 }
